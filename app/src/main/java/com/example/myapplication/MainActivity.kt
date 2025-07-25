@@ -4,12 +4,14 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.provider.MediaStore
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+
+// Activity that shows camera preview and takes a photo
+import com.example.yourappname.CameraActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -43,14 +45,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openCamera() {
-        // Create intent to open camera
-        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        val intent = Intent(this, CameraActivity::class.java)
+        startActivityForResult(intent, CAMERA_REQUEST_CODE)
+    }
 
-        // Check if there's a camera app available
-        if (cameraIntent.resolveActivity(packageManager) != null) {
-            startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE)
-        } else {
-            Toast.makeText(this, "No camera app found", Toast.LENGTH_SHORT).show()
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
+            val path = data?.getStringExtra("photoPath")
+            Toast.makeText(this, "Photo saved: $path", Toast.LENGTH_SHORT).show()
         }
     }
 
