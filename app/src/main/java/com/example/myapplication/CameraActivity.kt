@@ -1,4 +1,4 @@
-package com.example.yourappname
+package com.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle

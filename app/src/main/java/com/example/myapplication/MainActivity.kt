@@ -1,4 +1,4 @@
-package com.example.yourappname
+package com.example.myapplication
 
 import android.Manifest
 import android.content.Intent
@@ -11,7 +11,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
 // Activity that shows camera preview and takes a photo
-import com.example.yourappname.CameraActivity
+import com.example.myapplication.CameraActivity
 
 class MainActivity : AppCompatActivity() {
 
